@@ -15,7 +15,7 @@ exports.getScreams = functions.https.onRequest((request, response) => {
       .firestore()
       .collection('screams')
       .get()
-      .then(data => {
+      .then((data) => {
           let screams = [];
           data.forEach(doc => {
             screams.push(doc.data());
