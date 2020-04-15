@@ -1,7 +1,9 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-admin.initializeApp();
+admin.initializeApp({
+  credential: admin.credential.cert(require('./keys/admin.json'))
+});
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -17,13 +19,13 @@ exports.getScreams = functions.https.onRequest((request, response) => {
       .get()
       .then((data) => {
           let screams = [];
-          data.forEach(doc => {
+          data.forEach((doc) => {
             screams.push(doc.data());
           });
 
           return response.json(screams);
       })
-      .catch(err => console.error(err));
+      .catch((err) => console.error(err));
 });
 
 exports.createScream = functions.https.onRequest((request, response) => {
@@ -42,5 +44,5 @@ exports.createScream = functions.https.onRequest((request, response) => {
       .catch(err => {
         response.status(500).json({ error: 'something went wrong'});
         console.error(err);
-      })
+      });
 });
