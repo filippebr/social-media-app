@@ -7,9 +7,11 @@ module.exports = (request, response, next) => {
   } else {
     console.error('No token found');
     return response.status(403).json({ error: 'Unauthorized' })
-  }
+  } 
 
-  admin.auth().verifyIdToken(idToken)
+  admin
+    .auth()
+    .verifyIdToken(idToken)
     .then(decodedToken => {
       request.user = decodedToken;
       console.log(decodedToken);
