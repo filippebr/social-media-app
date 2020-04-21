@@ -19,6 +19,14 @@ let db = {
       likeCount: 5,
       commentCount: 2
     }
+  ],
+  comments: [
+    {
+      userHandle: 'user',
+      screamId: 'kdjsfgdksuufhgkdsufky',
+      body: 'nice one mate!',
+      createdAt: '2020-04-15T22:36:46.202Z'
+    }
   ]
 };
 
@@ -34,7 +42,6 @@ const userDetails = {
     website: 'https://user.com',
     location: 'London, UK'
   },
-
   likes: [
     {
       userHandle: 'user',
