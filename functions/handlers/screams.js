@@ -204,4 +204,27 @@ exports.unlikeScream = (request, response) => {
         console.error(err);
         response.status(500).json({ error: err.code});
       });
+};
+
+// Delete a scream
+exports.deleteScream = (request, response) => {
+  const document = db.doc(`/screams/${request.params.screamId}`);
+  document.get()
+    .then(doc => {
+      if ( !doc.exists ) {
+        return response.status(404).json({ error: 'Scream not found' });
+      }
+      if ( doc.data().userHandle !== request.user.handle ) {
+        return response.status(403).json({ error: 'Unauthorized' });
+      } else {
+        return document.delete();
+      }
+    })
+    .then(() => {
+      response.json({ message: 'Scream deleted successfully '});
+    })
+    .catch(err => {
+      console.error(err);
+      return response.status(500).json({ error: err.code });
+    })
 }
