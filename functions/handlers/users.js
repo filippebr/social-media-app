@@ -156,6 +156,7 @@ exports.getAuthenticatedUser = (request, response) => {
           .where('userHandle', '==', request.user.handle)
           .get();
       }
+      return; 
     })
     .then(data => {
       userData.likes = [];

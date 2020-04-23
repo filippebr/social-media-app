@@ -60,6 +60,7 @@ exports.createNotificationOnLike = functions
             screamId: doc.id
           });
         }
+        return;
       })
       .catch(err => console.error(err))  
   });
@@ -93,6 +94,7 @@ exports.createNotificationOnComment = functions
             screamId: doc.id
           });
         }
+        return;
       })
       .catch(err => {
         console.error(err);

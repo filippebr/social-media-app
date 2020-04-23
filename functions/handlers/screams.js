@@ -46,11 +46,12 @@ exports.postOneScream = (request, response) => {
     .then(doc => {
       const resScream = newScream;
       resScream.screamId = doc.id;
-      response.json(resScream);
+      return response.json(resScream);
     })
     .catch(err => {
       response.status(500).json({ error: 'something went wrong'});
       console.error(err);
+      
     });
 };
 
@@ -108,7 +109,7 @@ exports.commentOnScream = (request, response) => {
       return db.collection('comments').add(newComment);
     })
     .then(() => {
-      response.json(newComment);
+      return response.json(newComment);
     })
     .catch(err => {
       console.log(err);
@@ -196,7 +197,7 @@ exports.unlikeScream = (request, response) => {
               return screamDocument.update({ likeCount: screamData.likeCount});
             })
             .then(() => {
-              response.json(screamData);
+              return response.json(screamData);
             })
         }
       })
@@ -221,7 +222,7 @@ exports.deleteScream = (request, response) => {
       }
     })
     .then(() => {
-      response.json({ message: 'Scream deleted successfully '});
+      return response.json({ message: 'Scream deleted successfully '});
     })
     .catch(err => {
       console.error(err);
